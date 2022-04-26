@@ -42,7 +42,7 @@ trans = lambda x: x.translate(non_bmp_map)
 
 personality = "Kerbal"
 
-proh = ["hentai","porno","porn","parti","akp","chp","ataturk","erdogan","recep","tayip","tayyip","rte","feto","fetullah","hdp","ocalan","demirtas","selahattin","teror","hukumet"]
+proh = ["hentai","porno","porn","parti","akp","chp","ataturk","erdogan","recep","tayip","tayyip","rte","feto","fetullah","hdp","ocalan","teror","hukumet"]
 
 
 def check_swears(inp):
