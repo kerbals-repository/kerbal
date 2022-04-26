@@ -1,5 +1,5 @@
 # kerbal
-Turkish GPT-3 Bot for r/KGBTR (not tested yet)
+Turkish GPT-3 Bot for r/KGBTR (not tested & optimized yet)
 
 
 # acknowledgements
