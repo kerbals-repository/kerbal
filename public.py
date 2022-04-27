@@ -42,13 +42,12 @@ trans = lambda x: x.translate(non_bmp_map)
 
 personality = "Kerbal"
 
-proh = ["hentai","porn","parti","akp","chp","ataturk","erdogan","recep","tayip","tayyip","rte","feto","fetullah","hdp","ocalan","teror","hukumet","pkk"]
+proh = ["< replace with prohibited words for parent comment >"]
 
 
 def check_swears(inp):
     inp = fixer(inp)
-    swords = ["amk","amq","mal","salak"," sik"," oç "," oc ","anan"," ami","amcik","kancik","yarak","yarra"," got",
-    "serefsiz","hayvan"," oro"," ors"]
+    swords = ["< replace with swear words >"]
     for i in swords:
         if i in inp:
             return True
@@ -126,9 +125,9 @@ begin = time.monotonic()-2401
 admins = ["anancilikyapma"]
 customrep = {"anancilikyapma":"\n\n(◍•ᴗ•◍)❤"}
 
-neden_rand = ["kaplumbağa deden","anana sor","kurtlar vadisi 95. bölüm 43:17"]
+neden_rand = ["kaplumbağa deden"]
 good_bot_rand = [":)"]
-bad_bot_rand = ["siktir git o zaman"]
+bad_bot_rand = [":("]
 
 
 subreddit = reddit.subreddit("KGBTR")
