@@ -125,7 +125,8 @@ begin = time.monotonic()-2401
 admins = ["anancilikyapma"]
 customrep = {"anancilikyapma":"\n\n(◍•ᴗ•◍)❤"}
 
-neden_rand = ["kaplumbağa deden"]
+predef_rep = {"neden": ["kaplumbağa deden"]}
+
 good_bot_rand = [":)"]
 bad_bot_rand = [":("]
 
@@ -234,19 +235,21 @@ while True:
             cont = " ".join(cont)
             arranger = cont.lower().strip()
             tokens = tokenize(arranger)
-            if tokens[0]=="neden" and len(tokens)==1:
-                item.reply(random.choice(neden_rand))
+            if tokens[0] in predef_rep and len(tokens)==1:
+                item.reply(random.choice(predef_rep[tokens[0]]))
                 continue
             if arranger == "!remove" and item.author.name.lower() in admins:
             	try: item.parent().delete()
             	except: pass
             	continue
+
             if "good bot" in arranger:
-                item.reply(":)")
+                item.reply(random.choice(good_bot_rand))
                 continue
             elif "bad bot" in arranger:
-                item.reply("siktir git o zaman")
+                item.reply(random.choice(bad_bot_rand))
                 continue
+
             sc = check_swears(arranger)
             if sc:
                 item.downvote()
