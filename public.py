@@ -67,17 +67,7 @@ def fixer(inp):
 
 
 def rearrange(arranger):
-    arranger = arranger.replace("aq", "amk")
-    arranger = arranger.replace("amk", "amına koyayım")
-    arranger = arranger.replace(" oc", " orospu çocuğu")
-    arranger = arranger.replace(" oç", " orospu çocuğu")
-    arranger = arranger.replace(" sg", "siktir git")
-    arranger = arranger.replace(" bot", " yapay zeka")
-    arranger = arranger.replace("bot ", "yapay zeka ")
-    arranger = arranger.replace("kes lan", "kapa çeneni")
-    arranger = arranger.replace("flood", "kısa hikaye")
-    arranger = arranger.replace("yarra ", "yarrağı")
-    arranger = arranger.replace("31", "mastürbasyon")
+    #arrange language specific phrases here
     return arranger
 
 def tokenize(inp):
