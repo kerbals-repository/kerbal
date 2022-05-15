@@ -31,7 +31,7 @@ non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 
 trans = lambda x: x.translate(non_bmp_map)
 
-personality = "Kerbal" # I'd recommend using sth like John
+personality = "John" # I'd recommend using sth like John
 
 proh = []
 
@@ -66,14 +66,14 @@ def ask(question, chat_log, defprompt, deftemp=1, recprompt=None, ocrimg=None):
     global personality
     model = "text-davinci-002"
     if chat_log == None: chat_log = ""
-    prompt = f'{personality} is a philospher.\n\n{chat_log}Human:{question}\n{personality}:'
+    prompt = f'{personality} is a philospher.\n\n{chat_log}Person:{question}\n{personality}:'
     if recprompt != None:
         prompt = recprompt
     response = completion.create(
-        prompt=prompt, engine=model, stop=['\nHuman',f'\n{personality}','Human:',  f'{personality}:'], temperature=deftemp,#0.9
+        prompt=prompt, engine=model, stop=['\nPerson',f'\n{personality}','Person:',  f'{personality}:'], temperature=deftemp,#0.9
         top_p=0.55,presence_penalty = 1.6, frequency_penalty=1.7,  max_tokens=250)
     answer = response.choices[0].text.strip()
-    for i in ['\nHuman',f'\n{personality}','Human:',  f'{personality}:','\n']:
+    for i in ['\nPerson',f'\n{personality}','Person:',  f'{personality}:','\n']:
         answer = answer.strip(i)
     return answer
 
@@ -100,7 +100,7 @@ customrep = {}
 
 while True:
     try:
-        subreddit = reddit.subreddit(random.choice(["teenagers", "askreddit"]))
+        subreddit = reddit.subreddit("")
         if round(time.monotonic()-begin) > 420:
             print(str(subreddit))
             for i in subreddit.new(limit=5):
@@ -134,7 +134,7 @@ while True:
                 print("pass")
                 continue
             #print(item.body)
-            cont = item.body.strip().split("u/kerbal_galactic")
+            cont = item.body.strip().split("u/{}".format(username))
             cont = " ".join(cont)
             arranger = cont.lower()
             if "good bot" in arranger:
@@ -162,7 +162,7 @@ while True:
 
         for item in list(reddit.inbox.unread(limit=50))[::-1]:
             item.mark_read()
-            plist = [personality, "Human"]
+            plist = [personality, "Person"]
             prev = ""
             asc = 0
             parent = item
@@ -177,7 +177,7 @@ while True:
                     except:
                         try: check = " ".join(parent.body.strip().split("\n"))
                         except: break
-                    if "kerbal_galactic" in check:
+                    if "{}".format(username) in check:
                         break
                     if check in prev:
                         prev = None
@@ -191,7 +191,7 @@ while True:
             if prev.strip() == "":
                 prev = None
             print("-"*20+"\n",prev,"-"*20)
-            cont = item.body.strip().split("u/kerbal_galactic")
+            cont = item.body.strip().split("u/{}".format(username))
             cont = " ".join(cont)
             arranger = cont.lower().strip()
             tokens = tokenize(arranger)
@@ -214,11 +214,11 @@ while True:
             else: deftemp = 1
             fixed = fixer(arranger.lower())
             if any(i in fixed for i in proh):
-                print("Skipping political comment")
+                print("Skipping comment")
                 continue
 
             cont = arranger
-            newprompt = f'{personality} is a philosopher.\n\n{prev}Human:{cont}\n{personality}:'
+            newprompt = f'{personality} is a philosopher.\n\n{prev}Person:{cont}\n{personality}:'
             if " " in item.body:
                 nparent = item.parent()
                 while True:
@@ -228,7 +228,7 @@ while True:
                         break
                     except: pass
                     nparent = nparent.parent()
-                newprompt = f'{personality} is a philosopher.\n\n{prev}Human:{cont}\n{personality}:'
+                newprompt = f'{personality} is a philosopher.\n\n{prev}Person:{cont}\n{personality}:'
             print("-"*20)
             print(newprompt, end="")
 
