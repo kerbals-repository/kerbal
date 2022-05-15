@@ -5,10 +5,12 @@ import time
 import openai
 import random
 import deep_translator
-from deep_translator import GoogleTranslator, MyMemoryTranslator
+from deep_translator import GoogleTranslator#, MyMemoryTranslator
 from PyYandexOCR import PyYandexOCR
 
 ocr = PyYandexOCR(20)
+
+
 
 tr2en = GoogleTranslator(source='tr', target='en')
 en2tr = GoogleTranslator(source='en', target='tr')
@@ -40,7 +42,7 @@ forbidden_comments = ['[removed]', '[deleted]', '', ' ', None]
 non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 trans = lambda x: x.translate(non_bmp_map)
 
-personality = "Kerbal"
+personality = "John"
 
 proh = ["< replace with prohibited words for parent comment >"]
 
@@ -86,12 +88,6 @@ def ask(question, chat_log, defprompt, deftemp=1, recprompt=None, ocrimg=None):
         prompt=prompt, engine=model, stop=['\nHuman',f'\n{personality}','Human:',  f'{personality}:'], temperature=deftemp,#0.9
         top_p=0.75, presence_penalty = 1.2, frequency_penalty=1.9,  max_tokens=200)
 
-##        daha yüksek temperature         = daha yaratıcı cevaplar (model eğitilirken kullanılan veriden daha bağımsız)
-##        daha yüksek top_p               = daha standart(yapay) cevaplar
-##        çok düşük top_p                 = insansı ama anlamsız cevaplar
-##        daha yüksek presence_penalty    = daha az tekrar(sentiment tabanlı)
-##        daha yüksek frequency_penalty   = daha az tekrar(kelime tabanlı)
-        
     answer = response.choices[0].text.strip()
     for i in ['\nHuman',f'\n{personality}','Human:',  f'{personality}:','\n']:
         answer = answer.strip(i)
@@ -112,10 +108,10 @@ print("Initializing...")
 begin = time.monotonic()-2401
 
 
-admins = ["anancilikyapma"]
-customrep = {"anancilikyapma":"\n\n(◍•ᴗ•◍)❤"}
+admins = ["<username>"]
+customrep = {}
 
-predef_rep = {"neden": ["kaplumbağa deden"]}
+predef_rep = {"<sth>": ["<answer>"]}
 
 good_bot_rand = [":)"]
 bad_bot_rand = [":("]
