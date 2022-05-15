@@ -1,4 +1,4 @@
-# Bot or smh
+# Bot
 
 GPT-3 Bot for reddit (not tested & optimized yet)
 
