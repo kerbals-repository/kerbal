@@ -31,7 +31,7 @@ non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 
 trans = lambda x: x.translate(non_bmp_map)
 
-personality = "Kerbal"
+personality = "Kerbal" # I'd recommend using sth like John
 
 proh = []
 
