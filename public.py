@@ -15,6 +15,10 @@ ocr = PyYandexOCR(20)
 tr2en = GoogleTranslator(source='tr', target='en')
 en2tr = GoogleTranslator(source='en', target='tr')
 
+
+# You can change the target language by modifying those two functions
+
+
 ##tr2en = MyMemoryTranslator(source='tr', target='en')
 ##en2tr = MyMemoryTranslator(source='en', target='tr')
 
@@ -168,7 +172,7 @@ while True:
             if revel%40>0: break
             revel = 0
             if len(item.body)<20: continue
-            cont = item.body.strip().split("u/kerbal_galactic")
+            cont = item.body.strip().split("u/{}".format(username))
             cont = " ".join(cont)
             arranger = cont.lower()
             if "good bot" in arranger:
@@ -207,7 +211,7 @@ while True:
                     parent = parent.parent()
                     try: check = " ".join(parent.body.strip().split("\n"))
                     except: break
-                    if "u/kerbal_galactic" in check: break
+                    if "u/{}".format(username) in check: break
                     try: check = tr2en.translate(rearrange(check))
                     except:
                         try: check = tr2en.translate(rearrange(parent.title+"\n"+str(parent.selftext)))
@@ -217,7 +221,7 @@ while True:
                 except: break
             if prev == "": prev = None
             print("-"*20+"\n",prev,"-"*20)
-            cont = item.body.strip().split("u/kerbal_galactic")
+            cont = item.body.strip().split("u/{}".format(username))
             cont = " ".join(cont)
             arranger = cont.lower().strip()
             tokens = tokenize(arranger)
@@ -248,13 +252,13 @@ while True:
             fixed = fixer(arranger.lower())
             
             if any(i in fixed for i in proh):
-                print("Skipping political comment")
+                print("Skipping comment")
                 continue
 
             cont = tr2en.translate(arranger)
             newprompt = f'{personality} is a philosopher.\n\n{prev}Human:{cont}\n{personality}:'
 
-            if " " in item.body: #??? Test amaçlıydı if bloğu direk kaldırılabilir(?)
+            if " " in item.body: #just useless!?
                 nparent = item.parent()
                 while True:
                     print("Ascending")
