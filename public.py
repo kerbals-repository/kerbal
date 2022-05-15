@@ -117,7 +117,7 @@ good_bot_rand = [":)"]
 bad_bot_rand = [":("]
 
 
-subreddit = reddit.subreddit("KGBTR")
+subreddit = reddit.subreddit("")
 
 while True:
     try:
