@@ -1,3 +1,0 @@
-praw
-openai
-deep-translator
