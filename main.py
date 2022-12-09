@@ -18,11 +18,11 @@ client_secret=''
 username=''
 password=''
 
-app_id='5YTYVR-AU34H8TT5L'  # Wolframalpha API key
+app_id=''  # Wolframalpha API key
 
-openai.api_key='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' # OpenAI API key
+openai.api_key='' # OpenAI API key
 
-api=ocrspace.API(api_key='K86811002688957',language=ocrspace.Language.Turkish) # OCRSpace key
+api=ocrspace.API(api_key='',language=ocrspace.Language.Turkish) # OCRSpace key
 
 
 
