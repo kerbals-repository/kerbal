@@ -203,7 +203,7 @@ def fixer(inp):
 	return inp
 def rearrange(arranger):arranger=arranger.replace('aq','amk');arranger=arranger.replace('amk','');arranger=arranger.replace(' oc',' ');arranger=arranger.replace(' oç',' ');arranger=arranger.replace(' sg','siktir git');arranger=arranger.replace(' bot',' yapay zeka');arranger=arranger.replace('bot ','yapay zeka ');arranger=arranger.replace('kes lan','kapa çeneni');arranger=arranger.replace('flood','kısa hikaye');arranger=arranger.replace('yarra ','yarrağı');arranger=arranger.replace('31','mastürbasyon');return arranger.capitalize()
 def tokenize(inp):punc=set('\\\'@#₺_&-+()/*:;!?",.1234567890');return[''.join((char for char in word if char not in punc))for word in inp.split()]
-def ask(question,chat_log,defprompt,deftemp=1,recprompt=None,ocrimg=None):
+def ask(question,chat_log,defprompt,deftemp=None,recprompt=None,ocrimg=None):
 	global personality,botrole;model='text-davinci-003'
 	default_prompt = f'{personality} is a{condition} {botrole}. \n\n{chat_log}Human: {question}\n{personality}:'
 	ocr_prompt = f'{personality} is a{condition} {botrole}. Human shows a picture to {personality} and they talk about it.\n\nThe text in the picture: {ocrimg}\n\n{chat_log}Human: {question}\n{personality}:'
@@ -216,7 +216,9 @@ def ask(question,chat_log,defprompt,deftemp=1,recprompt=None,ocrimg=None):
 	except:pass
 	print('\n'+'-'*30);top_p=1
 	if checkmath(prompt):question=question.replace('?w','');prompt=wolframalpha_prompt;deftemp=0.2;top_p=0.9;chm=True;max_tokens=200
-	else:deftemp=0.85;chm=False;max_tokens=600
+	else:
+			if deftemp==None:deftemp=0.85
+			chm=False;max_tokens=600
 	response=completion.create(prompt=prompt,engine=model,stop=['Human',f"{personality}",'Human:',f"{personality}:"],temperature=deftemp,top_p=top_p,presence_penalty=1.3,frequency_penalty=1.6,max_tokens=max_tokens);answer=response.choices[0].text.strip()
 	if'not'in answer and'sure'in answer:answer=response.choices[1].text.strip()
 	if not chm:
@@ -241,7 +243,7 @@ colids=[]
 while revel+2:
 	try:
 		subreddit=reddit.subreddit('kgbtr')
-		if round(time.monotonic()-interval)>interval:
+		if round(time.monotonic()-begin)>interval:
 			for i in subreddit.new(limit=5):
 				if i.author not in forbidden_comments and not i.over_18 and i.id not in colids:
 					url=i.url;text=None
