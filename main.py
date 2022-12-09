@@ -13,8 +13,8 @@ from difflib import SequenceMatcher
 import wolframalpha
 
 
-client_id='ugP0pDuOKl4FuPs2h1iGiA'
-client_secret='g_xMR_PCf9uqduVsKqiscCb19OkJLg'
+client_id=''
+client_secret=''
 username=''
 password=''
 
